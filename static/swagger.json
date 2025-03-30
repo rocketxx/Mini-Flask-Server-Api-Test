@@ -149,6 +149,82 @@
             }
           }
         }
+      },
+      "/statistical_metrics": {
+        "get": {
+          "summary": "Calculate statistical metrics",
+          "description": "Computes basic statistical metrics (mean, median, variance, etc.) from a list of numbers (min 2 values required).",
+          "parameters": [
+            {
+              "name": "num1",
+              "in": "query",
+              "description": "First number",
+              "required": true,
+              "schema": {
+                "type": "number"
+              }
+            },
+            {
+              "name": "num2",
+              "in": "query",
+              "description": "Second number",
+              "required": true,
+              "schema": {
+                "type": "number"
+              }
+            },
+            {
+              "name": "numN",
+              "in": "query",
+              "description": "Additional numbers (optional)",
+              "required": false,
+              "schema": {
+                "type": "number"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful calculation",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "input_numbers": {
+                        "type": "array",
+                        "items": {"type": "number"}
+                      },
+                      "count": {"type": "integer"},
+                      "sum": {"type": "number"},
+                      "mean": {"type": "number"},
+                      "median": {"type": "number"},
+                      "min": {"type": "number"},
+                      "max": {"type": "number"},
+                      "range": {"type": "number"},
+                      "variance": {"type": "number"},
+                      "stdev": {"type": "number"},
+                      "geometric_mean": {"type": "number"}
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Invalid input",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "error": {"type": "string"}
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     }
   }
